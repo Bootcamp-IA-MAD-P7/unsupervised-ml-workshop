@@ -1,0 +1,21 @@
+# Virtual environment
+.venv/
+venv/
+
+# GitHub Copilot local configuration
+.github/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Operating system
+.DS_Store
+Thumbs.db
