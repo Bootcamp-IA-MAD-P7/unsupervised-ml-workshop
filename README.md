@@ -18,9 +18,9 @@ Dimensionality Reduction • Clustering • Anomaly Detection
 
 <br>
 
-![Status](https://img.shields.io/badge/Status-In%20Development-white?style=flat-square&labelColor=black)
+![Status](https://img.shields.io/badge/Status-Active%20Development-white?style=flat-square&labelColor=black)
 ![Bootcamp](https://img.shields.io/badge/Bootcamp-AI%20MAD%20P7-white?style=flat-square&labelColor=black)
-![Version](https://img.shields.io/badge/Version-v0.1-white?style=flat-square&labelColor=black)
+![Version](https://img.shields.io/badge/Version-v0.2-white?style=flat-square&labelColor=black)
 
 </div>
 
@@ -28,19 +28,25 @@ Dimensionality Reduction • Clustering • Anomaly Detection
 
 > [!IMPORTANT]
 >
-> **This repository is under active development.**
+> This repository documents my learning journey through the Unsupervised Machine Learning module of the AI Bootcamp.
 >
-> It documents my progress throughout the Machine Learning Bootcamp while implementing and analysing different unsupervised learning techniques. The documentation, notebooks and results will evolve together during the project.
+> Every notebook follows a reproducible workflow combining data preprocessing, dimensionality reduction, clustering, visualization and anomaly detection.
 
 ---
 
 # Overview
 
-This project explores the practical application of **Unsupervised Machine Learning** using two complementary datasets with fundamentally different characteristics.
+This repository explores the practical application of **Unsupervised Machine Learning** using two complementary datasets with very different characteristics.
 
-The objective is to compare how preprocessing techniques, dimensionality reduction, clustering algorithms and evaluation strategies behave depending on the structure of the data.
+The objective is to understand how preprocessing, dimensionality reduction and clustering algorithms behave depending on the structure of the data, while documenting the complete analytical workflow.
 
-The repository will progressively document the complete workflow, from data understanding to business interpretation.
+Current work focuses on:
+
+- Dimensionality Reduction (PCA & t-SNE)
+- Clustering
+- Cluster Validation
+- Anomaly Detection
+- Practical interpretation of results
 
 ---
 
@@ -52,12 +58,20 @@ The repository will progressively document the complete workflow, from data unde
 │   ├── mushrooms.csv
 │   └── credit_card.csv
 │
+├── docs/
+│   ├── daily/
+│   ├── decisions.md
+│   ├── methodology.md
+│   ├── notebook-spec.md
+│   ├── project-plan.md
+│   └── ...
+│
 ├── workshop-clustering-Mushrooms.ipynb
 ├── workshop-clustering-creditcard.ipynb
 │
 ├── requirements.txt
-├── .gitignore
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
 ---
@@ -67,95 +81,107 @@ The repository will progressively document the complete workflow, from data unde
 | Module | Status |
 |-------------------------------|:------:|
 | Repository setup | ✅ |
-| Virtual environment | ✅ |
-| Git workflow | ✅ |
-| README | 🚧 |
-| Mushroom notebook | ⏳ |
-| Credit Card notebook | ⏳ |
-| Documentation | ⏳ |
+| Development environment | ✅ |
+| Documentation structure | ✅ |
+| Mushroom Workshop | 🚧 |
+| Credit Card Workshop | ⏳ |
+| Final Documentation | ⏳ |
 
 ---
 
-# Technical Stack
+# Technologies
 
 - Python
 - Pandas
 - NumPy
-- Scikit-learn
-- SciPy
 - Matplotlib
 - Seaborn
-- Plotly
+- SciPy
+- Scikit-learn
 - Jupyter Notebook
 - Git
 - GitHub
 
 ---
 
-# Roadmap
+# Implemented Algorithms
 
-## Environment
+## Dimensionality Reduction
 
-- [x] Clone repository
-- [x] Configure virtual environment
-- [x] Install dependencies
-- [x] Configure Git workflow
+- PCA
+- t-SNE
 
-## Mushroom Workshop
+## Clustering
 
-- [ ] Data Understanding
-- [ ] Exploratory Data Analysis
-- [ ] Data Cleaning
-- [ ] Feature Encoding
-- [ ] PCA
-- [ ] t-SNE
-- [ ] Random Forest Baseline
-- [ ] Clustering Models
-- [ ] Cluster Validation
-- [ ] Isolation Forest
+- K-Means
+- Agglomerative Clustering
+- Gaussian Mixture Models (GMM)
+- DBSCAN
 
-## Credit Card Workshop
+## Validation Metrics
 
-- [ ] Data Understanding
-- [ ] Exploratory Data Analysis
-- [ ] Data Preprocessing
-- [ ] StandardScaler
-- [ ] PCA
-- [ ] Clustering Models
-- [ ] Customer Segmentation
-- [ ] Isolation Forest
+- Silhouette Score
+- Davies-Bouldin Index
+- Calinski-Harabasz Score
+- Adjusted Rand Index (ARI)
+- Normalized Mutual Information (NMI)
+
+## Anomaly Detection
+
+- Isolation Forest
 
 ---
 
-# Workshop Guide
+# Roadmap
 
-The complete workshop specification provided during the Machine Learning Bootcamp will be progressively integrated into this README as each stage of the project is completed.
+## Mushroom Workshop
 
-At this stage, the focus is on preparing the development environment and establishing a reproducible workflow before starting the implementation.
+- [x] Dataset understanding
+- [x] Data quality assessment
+- [x] Missing value handling
+- [x] Feature encoding
+- [x] Train/Test split
+- [x] PCA
+- [x] t-SNE
+- [x] Random Forest baseline
+- [x] Clustering algorithms
+- [x] Cluster validation
+- [x] Isolation Forest
+- [ ] Final review
+
+## Credit Card Workshop
+
+- [ ] Data understanding
+- [ ] Exploratory Data Analysis
+- [ ] Feature Scaling
+- [ ] PCA
+- [ ] Clustering
+- [ ] Customer Segmentation
+- [ ] Anomaly Detection
 
 ---
 
 # Getting Started
 
-Clone the repository:
+Clone the repository
 
 ```bash
 git clone https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop.git
 ```
 
-Create the virtual environment:
+Create the virtual environment
 
 ```bash
 python -m venv .venv
 ```
 
-Activate it:
+Activate it
 
 ```bash
 source .venv/Scripts/activate
 ```
 
-Install dependencies:
+Install dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -163,28 +189,42 @@ pip install -r requirements.txt
 
 ---
 
-# Current Goals
+# Current Progress
 
-- Prepare the project environment.
-- Review the datasets.
-- Complete the Mushroom notebook.
-- Document every stage of the analysis.
-- Maintain a clean Git history.
+## Completed
+
+- Data quality assessment
+- Missing value treatment
+- One-Hot Encoding
+- PCA
+- t-SNE
+- Random Forest baseline
+- K-Means
+- Agglomerative Clustering
+- Gaussian Mixture Models
+- DBSCAN
+- Isolation Forest
+- Internal and external clustering evaluation
+
+## Next
+
+- Final notebook review
+- Documentation polishing
+- Credit Card workshop
 
 ---
 
 # Project Soundtrack
 
-> *Every project deserves its own soundtrack.*
+> Every project deserves its own soundtrack.
 
-### Radiohead — From The Basement
-
+**Radiohead — From The Basement**
 
 ---
 
 <div align="center">
 
-**Machine Learning Bootcamp · 2026**
+Machine Learning Bootcamp · 2026
 
 Developed by **Gaby Granja**
 
