@@ -50,6 +50,18 @@ Current work focuses on:
 
 ---
 
+# Scientific Report
+
+The [MkDocs scientific report](docs/index.md) presents the advanced mushroom
+study as a reproducible academic case study for educational and portfolio
+purposes. It is not a peer-reviewed publication and must not be used as
+real-world mushroom-safety guidance.
+
+- [Read the report source](docs/index.md)
+- [Open the advanced notebook](workshop-advanced-unsupervised.ipynb)
+
+---
+
 # Repository Structure
 
 ```text

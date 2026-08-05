@@ -1,0 +1,24 @@
+:root {
+  --md-text-font: "Inter", "Segoe UI", sans-serif;
+}
+
+.md-typeset h1 {
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.md-typeset blockquote {
+  border-left-color: var(--md-accent-fg-color);
+}
+
+.study-lede {
+  color: var(--md-default-fg-color--light);
+  font-size: 1.05rem;
+  margin-top: -0.6rem;
+}
+
+.figure-caption {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.82rem;
+  margin-top: -0.4rem;
+}
