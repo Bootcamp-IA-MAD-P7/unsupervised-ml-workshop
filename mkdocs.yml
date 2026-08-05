@@ -1,0 +1,58 @@
+site_name: Advanced Unsupervised Learning Research Lab
+site_description: Academic case study of unsupervised learning on categorical mushroom data
+site_url: https://bootcamp-ia-mad-p7.github.io/unsupervised-ml-workshop/
+repo_url: https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop
+repo_name: Bootcamp-IA-MAD-P7/unsupervised-ml-workshop
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Abstract: paper/abstract.md
+  - Introduction: paper/introduction.md
+  - Methodology: paper/methodology.md
+  - Experiments: paper/experiments.md
+  - Results: paper/results.md
+  - Discussion: paper/discussion.md
+  - Limitations: paper/limitations.md
+  - Conclusions: paper/conclusions.md
+  - References: paper/references.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+strict: true
