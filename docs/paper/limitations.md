@@ -28,10 +28,6 @@
   importance.
 - One-Hot encoded categories can be mutually exclusive or strongly correlated,
   violating a naive interpretation of items as independent evidence.
-- The notebook contains stale narrative values that conflict with current
-  executed outputs. Specifically, its prose cites ARI 0.2266/NMI 0.1931 and a
-  different HDBSCAN sensitivity table. This report treats executed outputs
-  (ARI 0.0636, NMI 0.0465 and the results table shown here) as canonical.
 - Findings have not been tested on another dataset, so no generalization beyond
   this analysis is claimed.
 - The data and analysis provide no real-world mushroom-safety guidance.

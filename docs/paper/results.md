@@ -10,9 +10,9 @@ model inputs.
 | Analysis | Verified result |
 |---|---:|
 | Observations × encoded features | 8,124 × 115 |
-| K-Means on UMAP — ARI | 0.0636 |
-| K-Means on UMAP — NMI | 0.0465 |
-| Baseline HDBSCAN (`min_cluster_size=30`) | 87 clusters; 31 noise points |
+| K-Means on UMAP — ARI | 0.0116 |
+| K-Means on UMAP — NMI | 0.0079 |
+| Baseline HDBSCAN (`min_cluster_size=30`) | 92 clusters; 24 noise points |
 | Association rules generated | 3,462,243 |
 | Rules predicting edible / poisonous | 7,028 / 4,128 |
 | Compact selected rules | 10 per class |
@@ -35,7 +35,7 @@ low-dimensional representation, not by itself evidence of clustering quality.
 
 <p class="figure-caption"><strong>Figure 2.</strong> K-Means assignments on the UMAP embedding (left) compared with retrospective class labels (right).</p>
 
-**Finding.** The two-cluster solution achieved ARI 0.0636 and NMI 0.0465. The
+**Finding.** The two-cluster solution achieved ARI 0.0116 and NMI 0.0079. The
 weak agreement shows that a visually structured embedding did not make the
 centroid partition equivalent to the dataset's edible/poisonous labels.
 
@@ -43,17 +43,17 @@ centroid partition equivalent to the dataset's edible/poisonous labels.
 
 | `min_cluster_size` | `min_samples` | Clusters | Noise observations |
 |---:|---:|---:|---:|
-| 50 | 25 | 75 | 6 |
-| 100 | 50 | 28 | 341 |
-| 200 | 100 | 10 | 524 |
-| 300 | 150 | 6 | 236 |
-| 500 | 250 | 6 | 844 |
+| 50 | 25 | 77 | 128 |
+| 100 | 50 | 42 | 73 |
+| 200 | 100 | 10 | 464 |
+| 300 | 150 | 5 | 47 |
+| 500 | 250 | 5 | 510 |
 
 ![Cluster count across HDBSCAN sensitivity settings](../figures/hdbscan_cluster_count.png)
 
 <p class="figure-caption"><strong>Figure 3.</strong> Number of non-noise HDBSCAN clusters as the minimum cluster size increases.</p>
 
-**Finding.** The number of detected clusters fell sharply from 75 to 6 across
+**Finding.** The number of detected clusters fell sharply from 77 to 5 across
 the tested settings, confirming that the granular density partition is highly
 parameter-sensitive.
 
@@ -61,10 +61,10 @@ parameter-sensitive.
 
 <p class="figure-caption"><strong>Figure 4.</strong> Observations assigned the HDBSCAN noise label at each tested setting.</p>
 
-**Finding.** Noise generally increased as the density requirement became more
-restrictive, reaching 844 at the largest setting. The sequence was not
-monotonic—236 points were labelled noise at 300—so it should not be summarized
-as a simple linear relationship.
+**Finding.** Noise changed non-monotonically as the density requirement became
+more restrictive, reaching 510 at the largest setting but falling to 47 at
+`min_cluster_size=300`. It should not be summarized as a simple linear
+relationship.
 
 ## Association-rule feature patterns
 

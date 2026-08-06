@@ -1,88 +1,119 @@
-# Unsupervised ML Workshop
+# Unsupervised Machine Learning Workshop
 
-**Machine Learning Bootcamp · Gaby Granja**
+Machine Learning Bootcamp · Gaby Granja
 
-**Dimensionality Reduction • Clustering • Association Rules • Knowledge Discovery**
-
-![Python](https://img.shields.io/badge/Python-3.13-blue)
-![Scikit-learn](https://img.shields.io/badge/scikit--learn-Machine%20Learning-orange)
-![Status](https://img.shields.io/badge/Status-Completed-success)
-![Bootcamp](https://img.shields.io/badge/Academic-Bootcamp-lightgrey)
-
----
-
-## Overview
-
-This repository documents my work throughout the **Machine Learning Bootcamp**, exploring the practical application of **Unsupervised Machine Learning** using multiple real-world datasets.
-
-The project focuses on discovering hidden structures, natural groupings and meaningful associations in unlabeled data through dimensionality reduction, clustering and knowledge discovery techniques.
-
-Beyond implementing algorithms, this repository also emphasizes reproducibility, technical documentation and professional project presentation.
+[![Project Website](https://img.shields.io/badge/Project-Website-black?style=for-the-badge)](https://bootcamp-ia-mad-p7.github.io/unsupervised-ml-workshop/)
+[![Python](https://img.shields.io/badge/Python-3.11-black?style=flat-square)](https://www.python.org/)
+[![Scikit-Learn](https://img.shields.io/badge/scikit--learn-Latest-black?style=flat-square)](https://scikit-learn.org/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-black?style=flat-square)](https://jupyter.org/)
+[![MkDocs](https://img.shields.io/badge/MkDocs-Material-black?style=flat-square)](https://www.mkdocs.org/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-black?style=flat-square)](https://bootcamp-ia-mad-p7.github.io/unsupervised-ml-workshop/)
+[![Status](https://img.shields.io/badge/Status-Bootcamp%20Project-black?style=flat-square)]()
 
 ---
 
-# Project Website
+## Project Website
 
-As part of this project, I am also building a **research-style project website** to practice how Machine Learning studies are commonly documented and presented.
+The complete project documentation is available on GitHub Pages:
 
-The website summarizes the methodology, experiments, visualizations and key findings, while the Jupyter notebooks remain the reproducible technical implementation.
+### **https://bootcamp-ia-mad-p7.github.io/unsupervised-ml-workshop/**
 
-### Live Project Website
+The documentation includes:
 
-**https://bootcamp-ia-mad-p7.github.io/unsupervised-ml-workshop/**
-
-Current contents include:
-
-- Project overview
+- Complete workshop summaries
 - Methodology
-- Experiments
+- Visualisations
 - Results
-- Discussion
 - Conclusions
-- References
-- Interactive visualizations
+- Technical documentation
 
 ---
 
-# Project Highlights
+# Overview
 
-### Dimensionality Reduction
+This repository documents my practical work throughout the Machine Learning Bootcamp while learning and applying **Unsupervised Machine Learning** techniques.
 
+The project is organised into progressively more advanced workshops built around real-world datasets. Each workshop explores different preprocessing strategies, dimensionality reduction methods, clustering algorithms, anomaly detection techniques and association rule mining.
+
+The objective is to understand how unsupervised learning algorithms discover hidden structures in unlabeled data while developing reproducible machine learning workflows and technical documentation.
+
+---
+
+# Learning Objectives
+
+Throughout these workshops I practised:
+
+- Exploratory Data Analysis (EDA)
+- Data Cleaning
+- Missing Value Treatment
+- Feature Scaling
 - Principal Component Analysis (PCA)
-- Uniform Manifold Approximation and Projection (UMAP)
-
-### Clustering
-
-- K-Means
+- K-Means Clustering
+- Hierarchical Clustering
+- DBSCAN
 - HDBSCAN
-
-### Knowledge Discovery
-
-- FP-Growth
-- Association Rule Mining
-
-### Evaluation
-
-- Adjusted Rand Index (ARI)
-- Normalized Mutual Information (NMI)
-- Cluster comparison
-- Parameter sensitivity analysis
+- UMAP
+- Isolation Forest
+- Association Rule Mining (Apriori)
+- Cluster Evaluation
+- Customer Segmentation
+- Anomaly Detection
+- Technical Documentation with MkDocs
+- Git & GitHub Workflow
 
 ---
 
-# Visualizations
+# Workshops
 
-The project includes multiple visual analyses, including:
+## Workshop 1 · Mushroom Clustering
 
-- PCA Projection
-- UMAP Projection
-- K-Means vs Ground Truth
-- HDBSCAN Parameter Sensitivity
-- Feature Frequency Comparison
-- Dumbbell Plot
-- Feature Heatmap
-- Association Network
-- Interactive Sankey Diagram
+A practical introduction to unsupervised learning using a mushroom characteristics dataset.
+
+Main topics:
+
+- Exploratory Data Analysis
+- Feature preprocessing
+- Principal Component Analysis (PCA)
+- K-Means
+- Hierarchical Clustering
+- DBSCAN
+- Cluster comparison
+- Association Rules (Apriori)
+- Pattern interpretation
+
+---
+
+## Workshop 2 · Credit Card Customer Segmentation
+
+Customer behavioural dataset used to identify different spending profiles through unsupervised learning.
+
+Main topics:
+
+- Data quality assessment
+- Missing value treatment
+- Feature scaling
+- Principal Component Analysis (PCA)
+- K-Means clustering
+- Hierarchical clustering
+- DBSCAN
+- Customer profiling
+- Anomaly detection using Isolation Forest
+
+---
+
+# Advanced Workshops
+
+The repository also includes extended versions of both workshops with additional algorithms and evaluation techniques.
+
+Topics include:
+
+- UMAP
+- HDBSCAN
+- Bootstrap stability analysis
+- Internal clustering validation metrics
+- Advanced visualisations
+- Extended anomaly detection
+- Association rule optimisation
 
 ---
 
@@ -91,55 +122,42 @@ The project includes multiple visual analyses, including:
 ```text
 .
 ├── data/
-│   ├── mushrooms.csv
-│   └── credit_card.csv
-│
 ├── docs/
-│   ├── paper/
-│   ├── figures/
-│   └── assets/
-│
+├── images/
 ├── scripts/
-│
-├── workshop-clustering-mushrooms.ipynb
-├── workshop-advanced-unsupervised.ipynb
+├── workshop-clustering-Mushrooms.ipynb
 ├── workshop-clustering-creditcard.ipynb
-│
+├── workshop-advanced-unsupervised.ipynb
+├── workshop-clustering-creditcard-advanced.ipynb
 ├── mkdocs.yml
 ├── requirements.txt
-├── requirements-docs.txt
-│
 └── README.md
 ```
 
 ---
 
-# Development Status
+# Algorithms
 
-| Module | Status |
-|---------|:------:|
-| Repository setup | ✅ |
-| Git workflow | ✅ |
-| Mushroom Workshop | ✅ |
-| Advanced Unsupervised Workshop | ✅ |
-| Research-style Website | ✅ |
-| Documentation | ✅ |
-| Credit Card Workshop | 🚧 |
+| Category | Algorithms |
+|-----------|------------|
+| Dimensionality Reduction | PCA, UMAP |
+| Clustering | K-Means, Hierarchical Clustering, DBSCAN, HDBSCAN |
+| Anomaly Detection | Isolation Forest |
+| Pattern Discovery | Apriori Association Rules |
 
 ---
 
-# Technical Stack
+# Technologies
 
 - Python
-- Pandas
 - NumPy
-- Scikit-learn
-- SciPy
+- Pandas
 - Matplotlib
-- Plotly
-- UMAP
+- Seaborn
+- Scikit-learn
+- Mlxtend
+- UMAP-learn
 - HDBSCAN
-- mlxtend
 - Jupyter Notebook
 - MkDocs Material
 - Git
@@ -147,7 +165,26 @@ The project includes multiple visual analyses, including:
 
 ---
 
-# Reproducibility
+# Documentation
+
+Project documentation is built with **MkDocs Material** and published through **GitHub Pages**.
+
+The documentation contains:
+
+- Project overview
+- Workshop summaries
+- Methodology
+- Visualisations
+- Results
+- Conclusions
+
+Visit:
+
+**https://bootcamp-ia-mad-p7.github.io/unsupervised-ml-workshop/**
+
+---
+
+# Getting Started
 
 Clone the repository:
 
@@ -161,75 +198,70 @@ Create a virtual environment:
 python -m venv .venv
 ```
 
-Activate it:
+Activate it.
+
+Windows:
 
 ```bash
-source .venv/Scripts/activate
+.venv\Scripts\activate
 ```
 
-Install dependencies:
+Linux / macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+Install the dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Build the documentation:
+Launch Jupyter Notebook:
 
 ```bash
-mkdocs build --strict
-```
-
-Serve the website locally:
-
-```bash
-mkdocs serve
+jupyter notebook
 ```
 
 ---
 
-# Current Roadmap
+# Project Status
 
-### Completed
+Current version includes:
 
-- Repository setup
-- Development environment
-- Git workflow
-- Mushroom clustering workshop
-- Advanced unsupervised learning notebook
-- UMAP dimensionality reduction
-- HDBSCAN clustering
-- Association Rule Mining
-- Interactive visualizations
-- Research-style documentation website
-
-### In Progress
-
-- Credit Card customer segmentation
-- Additional clustering comparisons
-- Final project refinements
+- ✅ Mushroom Workshop
+- ✅ Credit Card Workshop
+- ✅ Advanced Mushroom Workshop
+- ✅ Advanced Credit Card Workshop
+- ✅ GitHub Pages documentation
+- ✅ Reproducible notebooks
+- ✅ Technical documentation
 
 ---
 
-# Academic Note
+# Highlights
 
-This repository was developed as part of a **Machine Learning Bootcamp**.
+This project includes:
 
-The project includes a **research-style website** created as a learning exercise to practice the structure, communication and visualization commonly found in technical and academic publications.
-
-It is **not** a peer-reviewed scientific publication.
-
-The mushroom analyses and association rules are intended exclusively for educational purposes and must **never** be interpreted as guidance for real-world mushroom identification or consumption.
-
----
-
-# Project Soundtrack
-
-Every project deserves its own soundtrack.
-
-**Radiohead — From The Basement**
+- Four complete Jupyter notebooks
+- Two real-world datasets
+- Progressive workshop structure
+- Reproducible machine learning workflows
+- Comparative evaluation of clustering algorithms
+- Customer segmentation
+- Anomaly detection
+- Association rule mining
+- Complete documentation with MkDocs
+- GitHub Pages deployment
+- Git workflow with feature branches and pull requests
 
 ---
 
-Developed by **Gaby Granja**
+# Author
 
-*"Good documentation is part of the product."*
+**Gaby Granja**
+
+Machine Learning Bootcamp
+
+Learning Machine Learning, Data Analytics and Artificial Intelligence through hands-on projects focused on real-world datasets.

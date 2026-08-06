@@ -20,10 +20,10 @@ combinations. Class labels were not used to fit the unsupervised models; they
 were used retrospectively for Adjusted Rand Index (ARI) and Normalized Mutual
 Information (NMI) validation.
 
-**Results.** K-Means on UMAP achieved ARI 0.0636 and NMI 0.0465, showing that
+**Results.** K-Means on UMAP achieved ARI 0.0116 and NMI 0.0079, showing that
 visual separation did not translate into close reference-label agreement.
-Baseline HDBSCAN returned 87 clusters and 31 noise observations; sensitivity
-settings produced 6–75 clusters. Association mining generated 3,462,243 rules;
+Baseline HDBSCAN returned 92 clusters and 24 noise observations; sensitivity
+settings produced 5–77 clusters. Association mining generated 3,462,243 rules;
 7,028 predicted edible and 4,128 predicted poisonous. `odor_n` recurred strongly
 in edible rules, whereas poisonous patterns combined categorical traits.
 

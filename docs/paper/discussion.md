@@ -5,16 +5,16 @@ separately. UMAP optimized a low-dimensional representation of local
 neighbourhood structure; K-Means optimized distances to two centroids in that
 representation. Compact islands can therefore look well separated while still
 being divided by centroids in a way that agrees poorly with the two reference
-classes. The recorded ARI and NMI are a useful negative result, not a reason to
-discard the embedding.
+classes. The recorded ARI 0.0116 and NMI 0.0079 are a useful negative result,
+not a reason to discard the embedding.
 
 UMAP's emphasis on local structure also helps explain the HDBSCAN result. Many
 small, dense islands became candidate clusters, so the baseline model returned
-87 clusters rather than the two labels present in the source dataset. Raising
+92 clusters rather than the two labels present in the source dataset. Raising
 `min_cluster_size` and `min_samples` forced progressively broader density
-requirements: the cluster count fell from 75 to 6 over the sensitivity range,
-while the overall noise count rose from 6 to 844. The intermediate noise counts
-were non-monotonic because changing both parameters alters the density
+requirements: the cluster count fell from 77 to 5 over the sensitivity range,
+while noise varied from 47 to 510 observations. The sequence was non-monotonic
+because changing both parameters alters the density
 hierarchy, stability selection and cluster assignments—not merely a fixed
 threshold.
 

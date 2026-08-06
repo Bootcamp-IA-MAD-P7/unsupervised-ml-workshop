@@ -24,10 +24,11 @@ flowchart LR
 
 ## Dimensionality reduction
 
-UMAP was fitted to all 115 encoded features with `n_components=2` and
-`random_state=42`. Other UMAP parameters remained at the installed package
-defaults. The output was an 8,124 × 2 embedding. Class labels were used only to
-colour the resulting visualization.
+UMAP was fitted to all 115 encoded features with `n_components=2`,
+`init="random"`, `random_state=42` and `n_jobs=1`. Random initialization was
+declared explicitly because spectral initialization failed on the sparse
+One-Hot matrix and produced run-to-run drift. The output was an 8,124 × 2
+embedding. Class labels were used only to colour the resulting visualization.
 
 ## Centroid-based clustering
 
@@ -70,7 +71,7 @@ adjusted for chance. Neither metric was used to train the models.
 
 The website presents the study as a concise scientific narrative; it does not
 duplicate the executable analysis page by page. The
-[advanced notebook](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop/blob/feat/advanced-unsupervised-techniques/workshop-advanced-unsupervised.ipynb)
+[advanced notebook](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop/blob/main/workshop-advanced-unsupervised.ipynb)
 contains the complete executable workflow and is the technical source of truth
 for preprocessing, model configuration, computations and recorded outputs.
 

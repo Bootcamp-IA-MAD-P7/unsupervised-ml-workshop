@@ -1,5 +1,5 @@
-site_name: Advanced Unsupervised Learning Research Lab
-site_description: Academic case study of unsupervised learning on categorical mushroom data
+site_name: Unsupervised Machine Learning Workshop
+site_description: Academic case studies in mushroom knowledge discovery and credit-card customer segmentation
 site_url: https://bootcamp-ia-mad-p7.github.io/unsupervised-ml-workshop/
 repo_url: https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop
 repo_name: Bootcamp-IA-MAD-P7/unsupervised-ml-workshop
@@ -29,15 +29,17 @@ theme:
 
 nav:
   - Home: index.md
-  - Abstract: paper/abstract.md
-  - Introduction: paper/introduction.md
-  - Methodology: paper/methodology.md
-  - Experiments: paper/experiments.md
-  - Results: paper/results.md
-  - Discussion: paper/discussion.md
-  - Limitations: paper/limitations.md
-  - Conclusions: paper/conclusions.md
-  - References: paper/references.md
+  - Credit Card Workshop: credit-card.md
+  - Mushroom Research:
+      - Abstract: paper/abstract.md
+      - Introduction: paper/introduction.md
+      - Methodology: paper/methodology.md
+      - Experiments: paper/experiments.md
+      - Results: paper/results.md
+      - Discussion: paper/discussion.md
+      - Limitations: paper/limitations.md
+      - Conclusions: paper/conclusions.md
+      - References: paper/references.md
 
 plugins:
   - search

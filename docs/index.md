@@ -1,6 +1,6 @@
-# Advanced Unsupervised Learning Research Lab
+# Unsupervised Machine Learning Workshop
 
-<p class="study-lede">Academic Machine Learning case study · Mushroom dataset</p>
+<p class="study-lede">Mushroom knowledge discovery · Credit-card customer segmentation</p>
 
 > **Academic disclosure**
 >
@@ -10,7 +10,14 @@
 >
 > The findings describe statistical associations in an academic dataset and must not be used to determine whether a real mushroom is safe to consume.
 
-## Project overview
+## Two complementary studies
+
+| Study | Data | Main question |
+|---|---|---|
+| [Mushroom research](paper/abstract.md) | High-dimensional categorical features | How do representation, density and association rules reveal structure? |
+| [Credit-card workshop](credit-card.md) | Numerical customer behaviour | Which segments are compact, stable, interpretable and useful for analysis? |
+
+## Mushroom research overview
 
 This case study examines how several unsupervised methods provide different
 representations of the same high-dimensional categorical dataset. The analysis
@@ -37,8 +44,8 @@ density structure under HDBSCAN, and directly readable class-associated rules.
 | One-Hot encoded features | 115 |
 | UMAP dimensions | 2 |
 | K-Means clusters | 2 |
-| K-Means ARI / NMI | 0.0636 / 0.0465 |
-| Baseline HDBSCAN clusters / noise points | 87 / 31 |
+| K-Means ARI / NMI | 0.0116 / 0.0079 |
+| Baseline HDBSCAN clusters / noise points | 92 / 24 |
 | Association-rule thresholds | support ≥ 0.20; confidence ≥ 0.90 |
 
 [Read the scientific report](paper/abstract.md){ .md-button .md-button--primary }
@@ -56,7 +63,7 @@ Where notebook prose and executed output disagree, the website uses the
 executed output and records the discrepancy in the
 [limitations](paper/limitations.md).
 
-[Open the complete executable notebook](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop/blob/feat/advanced-unsupervised-techniques/workshop-advanced-unsupervised.ipynb){ .md-button .md-button--primary }
+[Open the complete executable notebook](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop/blob/main/workshop-advanced-unsupervised.ipynb){ .md-button .md-button--primary }
 
 [Repository](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop)
 · `workshop-advanced-unsupervised.ipynb`

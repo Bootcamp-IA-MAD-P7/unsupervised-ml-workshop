@@ -27,10 +27,10 @@ OUTPUT_DIR = ROOT / "docs" / "figures"
 PNG_CELLS = {
     "umap_projection.png": 8,
     "kmeans_vs_ground_truth.png": 11,
-    "feature_frequency.png": 59,
-    "dumbbell_features.png": 68,
-    "feature_heatmap.png": 72,
-    "association_network.png": 77,
+    "feature_frequency.png": 38,
+    "dumbbell_features.png": 47,
+    "feature_heatmap.png": 51,
+    "association_network.png": 55,
 }
 
 
@@ -59,12 +59,14 @@ def output_text(cell: dict) -> str:
 def validate_canonical_outputs(notebook: dict) -> None:
     checks = {
         4: ("Observations: 8124", "Encoded features: 115"),
-        10: ("ARI : 0.0636", "NMI : 0.0465"),
-        18: ("Clusters: 87", "Noise points: 31"),
-        28: ("Association rules generated: 3462243",),
-        48: ("Total edible rules: 7028",),
-        49: ("Total poisonous rules: 4128",),
-        75: ("Network nodes: 17", "Network edges: 18"),
+        10: ("ARI : 0.0116", "NMI : 0.0079"),
+        16: ("Clusters: 92", "Noise points: 24"),
+        24: ("Association rules generated: 3462243",),
+        35: (
+            "Edible class rules analysed: 7,028",
+            "Poisonous class rules analysed: 4,128",
+        ),
+        54: ("Network nodes: 17", "Network edges: 18"),
     }
     for cell_number, expected_values in checks.items():
         actual = output_text(notebook["cells"][cell_number])
@@ -106,7 +108,7 @@ def export_embedded_pngs(notebook: dict) -> None:
 
 
 def parse_hdbscan_sensitivity(notebook: dict) -> tuple[list[int], list[int], list[int]]:
-    text = output_text(notebook["cells"][21])
+    text = output_text(notebook["cells"][18])
     matches = re.findall(
         r"min_cluster_size=\s*(\d+)\s+clusters=\s*(\d+)\s+noise=(\d+)",
         text,
@@ -148,7 +150,7 @@ def export_hdbscan_charts(notebook: dict) -> None:
     fig.tight_layout()
     fig.savefig(OUTPUT_DIR / "hdbscan_cluster_count.png", dpi=300)
     plt.close(fig)
-    print("exported hdbscan_cluster_count.png (parsed from notebook cell 21)")
+    print("exported hdbscan_cluster_count.png (parsed from notebook cell 18)")
 
     fig, ax = plt.subplots(figsize=(7.2, 4.6))
     ax.plot(sizes, noise, **style)
@@ -161,7 +163,7 @@ def export_hdbscan_charts(notebook: dict) -> None:
     fig.tight_layout()
     fig.savefig(OUTPUT_DIR / "hdbscan_noise.png", dpi=300)
     plt.close(fig)
-    print("exported hdbscan_noise.png (parsed from notebook cell 21)")
+    print("exported hdbscan_noise.png (parsed from notebook cell 18)")
 
 
 def export_sankey(notebook: dict) -> None:
@@ -173,7 +175,7 @@ def export_sankey(notebook: dict) -> None:
             "Install the project dependencies first."
         )
 
-    cell_number = 81
+    cell_number = 59
     figure = None
     for output in notebook["cells"][cell_number].get("outputs", []):
         figure = output.get("data", {}).get("application/vnd.plotly.v1+json")
@@ -187,7 +189,7 @@ def export_sankey(notebook: dict) -> None:
         html,
         encoding="utf-8",
     )
-    print("exported association_sankey.html (notebook cell 81)")
+    print(f"exported association_sankey.html (notebook cell {cell_number})")
 
 
 def main() -> int:

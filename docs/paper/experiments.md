@@ -28,10 +28,8 @@ a two-cluster centroid partition aligned with the reference classes.
 **Evaluation.** Compare assignments with the withheld class labels using ARI and
 NMI, and inspect clusters beside the label-coloured embedding.
 
-**Reference comparison.** The notebook narrative describes a mandatory workflow
-on the original encoded space, but its cited comparison values conflict with
-the advanced notebook's current executed output. No unverified reference metric
-is used in this report; the comparison is limited to the canonical UMAP result.
+**Reference comparison.** The comparison is limited to the executed UMAP result;
+the original-space workshop is evaluated separately in its own notebook.
 
 ## Experiment 3 — UMAP + HDBSCAN
 
