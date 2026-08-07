@@ -1,69 +1,69 @@
 # Unsupervised Machine Learning Workshop
 
-<p class="study-lede">Mushroom knowledge discovery · Credit-card customer segmentation</p>
+<p class="study-lede">Machine Learning Bootcamp · Gabriela Granja</p>
 
-> **Academic disclosure**
->
-> This report is a practical academic exercise developed during a Machine Learning Bootcamp. It follows a scientific-report structure for educational and portfolio purposes but has not undergone peer review.
+<div class="project-meta">
+<strong>Author</strong><br>
+Gabriela Granja<br>
+Digital Marketing professional transitioning into Artificial Intelligence, Data Analytics and Machine Learning through hands-on technical projects.
+</div>
 
-> **Safety notice**
->
-> The findings describe statistical associations in an academic dataset and must not be used to determine whether a real mushroom is safe to consume.
+This repository contains two complementary practical workshops for learning and
+comparing unsupervised machine learning techniques on datasets with
+fundamentally different structures. The notebooks are the reproducible evidence
+of the analyses; this website presents the workflows, visualisations, results
+and key learnings in a concise portfolio format.
 
-## Two complementary studies
+## Two workshops
 
-| Study | Data | Main question |
+### Workshop 1 · Mushroom Dataset
+
+A categorical dataset where sparse, high-dimensional representation is the
+central challenge. The workflow moves from cleaning and One-Hot Encoding to
+dimensionality reduction, centroid and density-based clustering, retrospective
+evaluation, association rules and an advanced UMAP/HDBSCAN exploration.
+
+[View Mushroom Workshop →](mushroom.md){ .md-button .md-button--primary }
+
+### Workshop 2 · Credit Card Customer Segmentation
+
+A numerical behavioural dataset with 8,950 customers and 17 modelling
+variables after identifier removal. The workshop addresses missing values,
+different numerical scales, skewed financial distributions, PCA, clustering,
+customer profiling, anomaly detection and advanced representation and stability
+analysis.
+
+[View Credit Card Workshop →](credit-card.md){ .md-button .md-button--primary }
+
+## Two datasets, different challenges
+
+| Aspect | Mushroom Dataset | Credit Card Dataset |
 |---|---|---|
-| [Mushroom research](paper/abstract.md) | High-dimensional categorical features | How do representation, density and association rules reveal structure? |
-| [Credit-card workshop](credit-card.md) | Numerical customer behaviour | Which segments are compact, stable, interpretable and useful for analysis? |
+| Data type | Categorical | Numerical |
+| Main challenge | Sparse, high-dimensional representation | Scale, skewness and behavioural structure |
+| Primary objective | Discover latent structure and readable associations | Identify interpretable customer segments |
+| Preprocessing | Missing-category treatment, constant removal, One-Hot Encoding | Identifier removal, median imputation, StandardScaler |
+| Dimensionality reduction | PCA, t-SNE and UMAP | PCA, t-SNE and UMAP |
+| Clustering | K-Means, agglomerative, DBSCAN and HDBSCAN | K-Means, agglomerative, DBSCAN, Gaussian Mixture and HDBSCAN |
+| Additional analysis | Association rules and anomaly exploration | Customer profiles, Isolation Forest and stability analysis |
 
-## Mushroom research overview
+## What this project explores
 
-This case study examines how several unsupervised methods provide different
-representations of the same high-dimensional categorical dataset. The analysis
-uses the UCI Mushroom dataset as a controlled learning problem: class labels are
-withheld from model fitting and used retrospectively to compare cluster
-assignments.
-
-**Research question:** How do different unsupervised learning techniques
-represent, partition and explain high-dimensional categorical mushroom data?
-
-The workflow combines categorical cleaning, One-Hot Encoding, UMAP, K-Means,
-HDBSCAN, FP-Growth and Association Rule Mining. The executed notebook reports
-clear local structure in the UMAP representation, weak agreement between
-two-cluster K-Means on that representation and the reference labels, granular
-density structure under HDBSCAN, and directly readable class-associated rules.
-
-## Study at a glance
-
-| Item | Verified study value |
-|---|---:|
-| Observations | 8,124 |
-| Original predictors | 22 categorical variables |
-| Predictors after constant-column removal | 21 |
-| One-Hot encoded features | 115 |
-| UMAP dimensions | 2 |
-| K-Means clusters | 2 |
-| K-Means ARI / NMI | 0.0116 / 0.0079 |
-| Baseline HDBSCAN clusters / noise points | 92 / 24 |
-| Association-rule thresholds | support ≥ 0.20; confidence ≥ 0.90 |
-
-[Read the scientific report](paper/abstract.md){ .md-button .md-button--primary }
+- Exploratory data analysis and preprocessing
+- Scaling and representation choices
+- PCA, t-SNE and UMAP
+- K-Means, hierarchical clustering, DBSCAN and HDBSCAN
+- Isolation Forest and association rules
+- Internal and retrospective clustering metrics
+- Sub-sampling stability analysis
+- Clear interpretation of limitations and negative results
 
 ## Reproducibility
 
-This website is the project's primary presentation layer. It provides the
-research narrative, selected evidence and scientific interpretation without
-reproducing the notebook cell by cell.
+The project includes four executed notebooks: baseline and advanced workflows
+for each dataset. Dependencies are declared in `requirements.txt`, random states
+are fixed where applicable, and the notebooks were validated sequentially.
+Website figures are exported from the recorded notebook outputs, while MkDocs
+Material builds the documentation published on GitHub Pages.
 
-The advanced notebook is the **complete executable analysis and technical source
-of truth** for preprocessing, parameter settings, computations and recorded
-outputs. It is supplementary reproducible evidence for the synthesized report.
-Where notebook prose and executed output disagree, the website uses the
-executed output and records the discrepancy in the
-[limitations](paper/limitations.md).
-
-[Open the complete executable notebook](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop/blob/main/workshop-advanced-unsupervised.ipynb){ .md-button .md-button--primary }
-
-[Repository](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop)
-· `workshop-advanced-unsupervised.ipynb`
+[View the source repository](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop){ .md-button }

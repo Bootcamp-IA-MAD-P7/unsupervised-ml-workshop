@@ -1,5 +1,5 @@
 site_name: Unsupervised Machine Learning Workshop
-site_description: Academic case studies in mushroom knowledge discovery and credit-card customer segmentation
+site_description: Practical unsupervised machine learning workshops by Gabriela Granja
 site_url: https://bootcamp-ia-mad-p7.github.io/unsupervised-ml-workshop/
 repo_url: https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop
 repo_name: Bootcamp-IA-MAD-P7/unsupervised-ml-workshop
@@ -14,32 +14,33 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: indigo
+      primary: black
+      accent: grey
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: black
+      accent: grey
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
 
 nav:
   - Home: index.md
+  - Mushroom Workshop: mushroom.md
   - Credit Card Workshop: credit-card.md
-  - Mushroom Research:
-      - Abstract: paper/abstract.md
-      - Introduction: paper/introduction.md
-      - Methodology: paper/methodology.md
-      - Experiments: paper/experiments.md
-      - Results: paper/results.md
-      - Discussion: paper/discussion.md
-      - Limitations: paper/limitations.md
-      - Conclusions: paper/conclusions.md
-      - References: paper/references.md
+
+exclude_docs: |
+  daily/
+  paper/
+  decisions.md
+  methodology.md
+  notebook-spec.md
+  project-constitution.md
+  project-plan.md
+  references.md
 
 plugins:
   - search
@@ -56,5 +57,14 @@ markdown_extensions:
 
 extra_css:
   - assets/stylesheets/extra.css
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop
+      name: Project repository
+
+copyright: Developed by Gabriela Granja · Machine Learning Bootcamp Project
 
 strict: true

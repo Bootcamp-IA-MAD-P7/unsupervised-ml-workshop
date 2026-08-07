@@ -1,5 +1,9 @@
 :root {
   --md-text-font: "Inter", "Segoe UI", sans-serif;
+  --md-primary-fg-color: #111111;
+  --md-primary-fg-color--light: #333333;
+  --md-primary-fg-color--dark: #000000;
+  --md-accent-fg-color: #555555;
 }
 
 .md-typeset h1 {
@@ -9,6 +13,20 @@
 
 .md-typeset blockquote {
   border-left-color: var(--md-accent-fg-color);
+}
+
+.md-typeset a {
+  text-underline-offset: 0.14em;
+}
+
+.md-typeset .md-button {
+  border-radius: 0;
+}
+
+.md-typeset .md-button--primary {
+  background-color: #111111;
+  border-color: #111111;
+  color: #ffffff;
 }
 
 .study-lede {
@@ -21,4 +39,14 @@
   color: var(--md-default-fg-color--light);
   font-size: 0.82rem;
   margin-top: -0.4rem;
+}
+
+.project-meta {
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color--light);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  margin: 1.5rem 0 2rem;
+  padding: 0.75rem 0;
 }

@@ -1,129 +1,261 @@
 # Credit Card Customer Segmentation
 
-<p class="study-lede">Numerical clustering case study · 8,950 customers</p>
+<p class="study-lede">Numerical behaviour · customer profiles · anomaly exploration</p>
 
-This workshop segments cardholders from six months of aggregated behaviour.
-Unlike the mushroom study, no reference class is available: model selection
-therefore combines internal clustering metrics with the interpretability of the
-resulting customer profiles.
+<div class="project-meta">
+<strong>Project:</strong> Unsupervised Machine Learning Workshop<br>
+<strong>Author:</strong> Gabriela Granja<br>
+<strong>Repository:</strong> <a href="https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop">GitHub</a><br>
+<strong>Documentation:</strong> GitHub Pages
+</div>
 
-> **Scope**
->
-> The segments are an academic exercise. They are not credit-risk decisions,
-> fraud labels or recommendations for automated customer treatment.
+## Objective
 
-## Learning objective
+This workshop uses unsupervised learning to explore behavioural patterns among
+credit-card customers without predefined segment labels. Because there is no
+ground-truth segmentation, model selection must combine internal clustering
+metrics with cluster balance and interpretable profiles in the original
+financial variables.
 
-The analysis demonstrates why numerical clustering requires explicit data
-quality checks, scaling and careful validation. It also separates the
-introductory workflow from optional advanced experiments:
+The resulting groups are segmentation hypotheses. They are not credit-risk
+decisions, fraud labels or recommendations for automated customer treatment.
 
-- [`workshop-clustering-creditcard.ipynb`](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop/blob/main/workshop-clustering-creditcard.ipynb):
-  complete baseline workflow;
-- [`workshop-clustering-creditcard-advanced.ipynb`](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop/blob/main/workshop-clustering-creditcard-advanced.ipynb):
-  KPI engineering, `log1p`, stability analysis and UMAP/HDBSCAN.
+## Dataset
 
-## Baseline workflow
+| Item | Executed notebook result |
+|---|---:|
+| Customers | 8,950 |
+| Original columns | 18 |
+| Behavioural variables after `CUST_ID` removal | 17 |
+| Duplicate rows | 0 |
+| Missing `CREDIT_LIMIT` values | 1 |
+| Missing `MINIMUM_PAYMENTS` values | 313 |
+
+The numerical variables summarise six months of balance, purchase,
+cash-advance, payment, credit-limit, frequency and tenure behaviour. Their
+ranges differ substantially, and several monetary distributions are strongly
+right-skewed.
 
 ```mermaid
 flowchart LR
-    A[Load and inspect] --> B[Impute medians]
+    A[Inspect data] --> B[Impute medians]
     B --> C[Standardize]
     C --> D[PCA]
     D --> E[Select k]
-    E --> F[K-Means]
-    F --> G[Compare algorithms]
-    G --> H[Profile segments]
-    H --> I[Detect anomalies]
+    E --> F[Cluster]
+    F --> G[Profile]
+    G --> H[Detect anomalies]
+    H --> I[Extend and test stability]
 ```
 
-The identifier is excluded from modelling. The single missing
-`CREDIT_LIMIT` value and 313 missing `MINIMUM_PAYMENTS` values are imputed with
-their medians because the monetary variables are strongly right-skewed.
-Standardization prevents large monetary ranges from dominating distances.
+## Data quality and preparation
 
-PCA is used first to quantify retained variance and then as a two-dimensional
-visual aid. Seven components retain 80.75% of the standardized variance; the
-models themselves use the complete standardized feature space unless a section
-explicitly states otherwise.
+`CUST_ID` is retained only for tracing records and excluded from modelling. The
+missing `CREDIT_LIMIT` and `MINIMUM_PAYMENTS` values are imputed with each
+column's median, a robust choice for the skewed monetary variables. No missing
+values remain after this step.
 
-## Model selection
+![Distributions of selected credit-card behavioural variables](figures/credit_distributions.png)
 
-![K-Means model-selection curves](figures/credit_k_selection.png)
+<p class="figure-caption"><strong>Figure 1.</strong> Six selected monetary and behavioural distributions from the executed baseline notebook.</p>
 
-<p class="figure-caption"><strong>Figure 1.</strong> Inertia and sampled
-silhouette across k=2–8. The executed maximum is k=3 with silhouette 0.238.</p>
+The long right tails are visible rather than hidden: `MINIMUM_PAYMENTS`,
+`PURCHASES`, `PAYMENTS` and `CASH_ADVANCE` record skewness of 13.85, 8.14, 5.91
+and 5.17 respectively. This motivates median imputation and cautions against
+interpreting raw means without context.
 
-K-Means was selected with three clusters. On the common evaluation sample it
-outperformed the tested agglomerative and Gaussian-mixture alternatives across
-silhouette, Davies-Bouldin and Calinski-Harabasz. The result remains a moderate
-geometric separation, so business interpretation is part of validation rather
-than an afterthought.
+## Feature scaling
 
-DBSCAN on the PCA projection found one main dense region and labelled 681
-customers (7.6%) as noise. This does not make those customers anomalous in a
-business or fraud sense; it shows that the selected density configuration does
-not provide a useful exhaustive segmentation.
+All 17 modelling variables are transformed with `StandardScaler`. This prevents
+large monetary values from dominating Euclidean distances used by K-Means,
+hierarchical clustering and PCA. The executed check confirms approximately zero
+mean and unit standard deviation for every scaled feature.
+
+## PCA
+
+PCA first quantifies how much of the standardized feature space can be retained
+in fewer dimensions.
+
+![Cumulative explained variance from PCA](figures/credit_pca_variance.png)
+
+<p class="figure-caption"><strong>Figure 2.</strong> Cumulative explained variance across principal components; seven components retain 80.75%.</p>
+
+Seven components reach the selected 80% threshold, retaining **80.75%** of the
+standardized variance. This is a compression result, not evidence of clusters.
+
+![Two-dimensional PCA projection of credit-card customers](figures/credit_pca_projection.png)
+
+<p class="figure-caption"><strong>Figure 3.</strong> First two principal components, which together explain 47.61% of the standardized variance.</p>
+
+The two-dimensional view is useful for seeing the broad geometry but does not
+represent all original information. The continuous cloud offers no obvious
+visual ground truth, so clustering is evaluated in the complete standardized
+feature space unless stated otherwise.
+
+## K-Means model selection
+
+![Elbow and sampled silhouette curves for K-Means](figures/credit_k_selection.png)
+
+<p class="figure-caption"><strong>Figure 4.</strong> Inertia and sampled silhouette for k=2–8. The highest tested sampled silhouette selects k=3 at 0.238.</p>
+
+Inertia declines continuously, so the elbow alone is not decisive. The sampled
+silhouette curve reaches its tested maximum at **k=3**, which is selected for
+the baseline. The modest score signals overlapping behavioural structure rather
+than sharply isolated groups.
+
+## Final K-Means segmentation
+
+| Cluster profile | Customers | Share |
+|---|---:|---:|
+| Low activity | 6,119 | 68.37% |
+| Intensive purchasers | 1,235 | 13.80% |
+| Cash-advance users | 1,596 | 17.83% |
+
+![K-Means customer segments in a t-SNE projection](figures/credit_kmeans_clusters.png)
+
+<p class="figure-caption"><strong>Figure 5.</strong> A stratified sample of the final K-Means labels shown in a t-SNE projection for visual inspection.</p>
+
+The projection shows structure and overlap but is not the fitting space. On the
+common comparison sample, K-Means records silhouette **0.251**,
+Calinski-Harabasz **526.01** and Davies-Bouldin **1.58**, the best combination
+among the three exhaustive baseline algorithms tested.
 
 ## Customer profiles
 
 ![Standardized customer segment profiles](figures/credit_segment_profiles.png)
 
-<p class="figure-caption"><strong>Figure 2.</strong> Relative cluster means.
-Red indicates above-average and blue below-average behaviour across the three
-segments.</p>
+<p class="figure-caption"><strong>Figure 6.</strong> Segment means standardized relative to the full-dataset mean; the table below restores selected values to original units.</p>
 
-The profiles support three descriptive names:
+The executed profile table supports descriptive—not permanent—names:
 
-| Segment | Main pattern | Possible analytical use |
+| Segment | Evidence in the original variables | Practical interpretation |
 |---|---|---|
-| Low activity | Lower balances, purchases and limits | Activation and retention analysis |
-| Intensive purchasers | Higher purchases, frequency, limits and payments | Loyalty and cross-selling analysis |
-| Cash-advance users | Higher balances and cash advances; lower full-payment rate | Manual risk review and cost communication |
+| Low activity | Mean balance 799.75; purchases 505.53; cash advance 330.82 | Broad group with comparatively low account activity |
+| Intensive purchasers | Purchases 4,268.52; purchase frequency 0.95; credit limit 7,733.97; payments 4,151.28 | Frequent, high-value purchase behaviour |
+| Cash-advance users | Balance 3,989.14; cash advance 3,866.21; full-payment rate 0.03 | High balance and cash-advance use with low full-payment frequency |
 
-These names summarize averages. They are not permanent customer identities and
-should be validated against profitability, arrears and fairness criteria before
-operational use.
+These averages make the clusters interpretable, but operational use would
+still require profitability, arrears and fairness evidence that the dataset
+does not contain.
+
+## Hierarchical clustering
+
+Agglomerative clustering is inspected through a dendrogram built on a sample,
+then evaluated with three clusters on the same comparison sample used for the
+other exhaustive algorithms.
+
+![Hierarchical clustering dendrogram for a customer sample](figures/credit_dendrogram.png)
+
+<p class="figure-caption"><strong>Figure 7.</strong> Ward-linkage dendrogram on a sample, used to inspect merging structure without rendering all 8,950 leaves.</p>
+
+Its silhouette is **0.17**, Calinski-Harabasz **401.83** and Davies-Bouldin
+**1.81**. It provides a useful structural comparison but separates the tested
+sample less clearly than baseline K-Means.
+
+## DBSCAN
+
+DBSCAN is applied to the PCA(2) projection as an exploratory density analysis,
+not as the final customer segmentation.
+
+![DBSCAN assignments on the two-dimensional PCA projection](figures/credit_dbscan.png)
+
+<p class="figure-caption"><strong>Figure 8.</strong> DBSCAN finds one main dense region and marks 681 customers as noise in PCA space.</p>
+
+The model identifies one cluster and **681 noise observations (7.6%)**. This
+configuration does not yield a useful exhaustive segmentation; its noise label
+means low density under the chosen representation and parameters, not fraud or
+business anomaly.
+
+## Algorithm comparison
+
+| Algorithm | Clusters | Silhouette | Calinski-Harabasz | Davies-Bouldin | Notes |
+|---|---:|---:|---:|---:|---|
+| K-Means | 3 | 0.251 | 526.01 | 1.58 | Best baseline metric combination |
+| Agglomerative | 3 | 0.17 | 401.83 | 1.81 | Similar exhaustive objective |
+| Gaussian Mixture | 3 | 0.11 | 298.82 | 2.62 | Soft probabilistic model, evaluated as hard labels |
+| DBSCAN on PCA(2) | 1 + noise | — | — | — | 681 noise points; not an exhaustive segmentation |
+
+No single internal metric establishes business usefulness. The comparison
+supports K-Means as the clearest baseline only when its stronger internal
+metrics are considered together with the interpretable original-unit profiles.
 
 ## Anomaly detection
 
-![Isolation Forest observations on PCA](figures/credit_anomalies.png)
+Isolation Forest ranks unusual combinations of all standardized behaviours.
+The contamination value is explicitly set to **3%** as an analytical assumption;
+it is not an estimate of fraud prevalence.
 
-<p class="figure-caption"><strong>Figure 3.</strong> Isolation Forest with a
-declared 3% contamination assumption identifies 269 observations for review.</p>
+![Isolation Forest anomalies in a PCA projection](figures/credit_anomalies.png)
 
-Isolation Forest prioritizes unusual combinations of behaviour. It does not
-establish fraud, data error or premium status; each flagged case requires
-contextual investigation.
+<p class="figure-caption"><strong>Figure 9.</strong> The model flags 269 observations for review and displays them on the PCA projection.</p>
+
+The flagged **269 customers** are candidates for contextual review. The model
+does not establish fraud, error or customer value.
 
 ## Advanced extension
 
-The separate advanced notebook adds credit-utilization, average-transaction and
-payment ratios, then compares the base representation with KPI and
-KPI-plus-`log1p` variants.
+The advanced notebook adds four derived indicators—credit utilization, average
+purchase per transaction, average cash advance per transaction and the
+payment-to-minimum ratio—then compares three representations.
 
-- The advanced K-Means solution has mean sub-sampling stability ARI
-  **0.933 ± 0.107**.
-- UMAP/HDBSCAN finds **6 clusters**, no noise, and silhouette **0.727** in the
-  UMAP embedding.
-- Its ARI against advanced K-Means is **0.347**, so it is an alternative
-  representation rather than an automatic replacement.
+| Representation | Silhouette | Davies-Bouldin | ARI vs baseline | Largest cluster |
+|---|---:|---:|---:|---:|
+| Base | 0.251 | 1.585 | 1.000 | 68.369% |
+| Base + KPIs | 0.175 | 1.796 | 0.392 | 54.749% |
+| Base + KPIs + `log1p` | 0.210 | 1.768 | 0.136 | 35.374% |
 
-![UMAP and HDBSCAN advanced comparison](figures/credit_umap_hdbscan.png)
+Feature enrichment materially changes the segmentation. The KPI-plus-`log1p`
+version is more balanced but agrees weakly with the baseline and does not
+improve its silhouette; balance alone therefore does not make it a replacement.
 
-<p class="figure-caption"><strong>Figure 4.</strong> The same UMAP embedding
-coloured by advanced K-Means and HDBSCAN assignments.</p>
+Ten sub-sampling runs compare the advanced K-Means labels with the full-data
+reference solution. Their mean ARI is **0.933 ± 0.107**, evidence of strong but
+not perfect stability under this resampling procedure.
 
-## Conclusions and limitations
+![Advanced K-Means and HDBSCAN labels on a shared UMAP embedding](figures/credit_umap_hdbscan.png)
 
-- Scaling is essential for distance-based modelling on these mixed-range
-  numerical variables.
-- Three K-Means profiles provide the clearest baseline balance between internal
-  quality and interpretability.
-- Density and anomaly labels answer different questions from customer
-  segmentation and must not be conflated.
-- The file contains six-month aggregates but no date or period field. Genuine
-  temporal validation requires comparable monthly snapshots.
-- The dataset lacks profitability, arrears and demographic variables, so the
-  business value and fairness of the segments remain untested.
+<p class="figure-caption"><strong>Figure 10.</strong> The same UMAP representation coloured by advanced K-Means and HDBSCAN assignments.</p>
 
+UMAP/HDBSCAN finds **6 clusters**, **0% noise**, and silhouette **0.727** within
+the UMAP embedding. Its ARI against advanced K-Means is **0.347**, so the high
+embedding-space separation describes an alternative representation rather than
+automatic confirmation of the K-Means solution.
+
+## Key analysis indicators
+
+| Indicator | Value |
+|---|---:|
+| Customers analysed | 8,950 |
+| Baseline variables | 17 |
+| Selected baseline k | 3 |
+| Components retaining at least 80% PCA variance | 7 |
+| Variance retained by those components | 80.75% |
+| Baseline K-Means silhouette | 0.251 |
+| Baseline K-Means Calinski-Harabasz | 526.01 |
+| Baseline K-Means Davies-Bouldin | 1.58 |
+| Largest baseline segment | 68.37% |
+| Advanced sub-sampling stability ARI | 0.933 ± 0.107 |
+
+## Conclusions
+
+The baseline analysis finds three understandable behavioural profiles: a large
+low-activity group, intensive purchasers and customers characterised by high
+cash-advance use. Median imputation preserved all observations, and scaling was
+essential to stop monetary ranges from dominating distance-based models.
+K-Means provided the strongest tested baseline combination of internal metrics
+and interpretability.
+
+The advanced representation changed cluster balance and membership
+substantially. Its sub-sampling stability was strong, while UMAP/HDBSCAN exposed
+a different six-cluster geometry rather than validating the same partition.
+Isolation Forest contributes a review queue for unusual behaviour but no fraud
+claim.
+
+These results remain segmentation hypotheses, not ground truth. A genuine
+temporal validation cannot be performed because the available dataset contains
+six-month aggregates but no suitable date or repeated-period observations.
+
+The full evidence is reproducible in
+[`workshop-clustering-creditcard.ipynb`](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop/blob/main/workshop-clustering-creditcard.ipynb)
+and
+[`workshop-clustering-creditcard-advanced.ipynb`](https://github.com/Bootcamp-IA-MAD-P7/unsupervised-ml-workshop/blob/main/workshop-clustering-creditcard-advanced.ipynb).

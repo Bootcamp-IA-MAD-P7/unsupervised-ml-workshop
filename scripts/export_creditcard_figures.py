@@ -13,9 +13,33 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = ROOT / "docs" / "figures"
 SOURCES = {
+    "credit_distributions.png": (
+        ROOT / "workshop-clustering-creditcard.ipynb",
+        19,
+    ),
+    "credit_pca_variance.png": (
+        ROOT / "workshop-clustering-creditcard.ipynb",
+        23,
+    ),
+    "credit_pca_projection.png": (
+        ROOT / "workshop-clustering-creditcard.ipynb",
+        24,
+    ),
     "credit_k_selection.png": (
         ROOT / "workshop-clustering-creditcard.ipynb",
         27,
+    ),
+    "credit_dendrogram.png": (
+        ROOT / "workshop-clustering-creditcard.ipynb",
+        31,
+    ),
+    "credit_dbscan.png": (
+        ROOT / "workshop-clustering-creditcard.ipynb",
+        33,
+    ),
+    "credit_kmeans_clusters.png": (
+        ROOT / "workshop-clustering-creditcard.ipynb",
+        38,
     ),
     "credit_segment_profiles.png": (
         ROOT / "workshop-clustering-creditcard.ipynb",
